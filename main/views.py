@@ -4,8 +4,6 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
-# https://www.django-rest-framework.org/api-guide/generic-views/
-
 class Table_View(generics.ListCreateAPIView):
     queryset = Table.objects.all()
     serializer_class = Table_Serializer
@@ -16,13 +14,13 @@ class Table_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = Table_Serializer
 
 class Order_View(generics.ListCreateAPIView):
-    queryset = Order.objects.filter(closed=False)
+    queryset = Order.objects.filter()
     permission_classes = [Waiter_FullAccess|Kitchen_ReadOnly]
     serializer_class = Order_Serializer
 class Order_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     permission_classes = [Waiter_FullAccess|Kitchen_ReadOnly]
-    serializer_class = Order_Serializer
+    serializer_class = Order_Serializer_Single_Serializer
 
 class Meal_View(generics.ListCreateAPIView):
     queryset = Meal.objects.all()
