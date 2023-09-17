@@ -1,8 +1,6 @@
 from .permissions import *
 from .serializers import *
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import status
 
 class Table_View(generics.ListCreateAPIView):
     queryset = Table.objects.all()
