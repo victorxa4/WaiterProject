@@ -14,9 +14,6 @@ class Table_Serializer(serializers.ModelSerializer):
         model = Table
         fields = '__all__'
 
-def set_waiter(self,request):
-    request.data.waiter = request.user
-
 class Order_Meal_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Order_Meal
