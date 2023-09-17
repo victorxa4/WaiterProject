@@ -20,8 +20,10 @@ class Account(AbstractUser):
     )
 
     def save(self):
-        self.set_password(self.password)
-        super(Account, self).save()
+        user = super(Account, self)
+        user.set_password(self.password)
+        user.save()
+        return user
 
 class Table(models.Model):
     class table_status_choices(models.TextChoices):
@@ -60,5 +62,5 @@ class Order(models.Model):
     waiter = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
 
 class Order_Meal(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_meals')
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='order_meals')

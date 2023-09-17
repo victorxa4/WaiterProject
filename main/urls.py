@@ -31,7 +31,11 @@ urlpatterns = [
     ##
 
     path('table/', Table_View.as_view(), name='table'),
+    path('table/<int:pk>/', Table_RetrieveUpdateDestroy_View.as_view(), name='single_table'),
 
     path('order/', Order_View.as_view(), name='order'),
-    path('order/<int:pk>/', Order_Destroy_View.as_view(), name='destroy_order'),
+    path('order/<int:pk>/', Order_RetrieveUpdateDestroy_View.as_view(), name='single_order'),
+
+    path('meal/', Meal_View.as_view(), name='meal'),
+    path('meal/<int:pk>/', Meal_RetrieveUpdateDestroy_View.as_view(), name='single_meal'),
 ]
