@@ -22,11 +22,11 @@ class Order_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
 
 class Meal_View(generics.ListCreateAPIView):
     queryset = Meal.objects.all()
-    permission_classes = [Waiter_ReadOnly|Kitchen_ReadOnly]
+    permission_classes = [ReadOnly]
     serializer_class = Meal_Serializer
 class Meal_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Meal.objects.all()
-    permission_classes = [Waiter_ReadOnly|Kitchen_ReadOnly]
+    permission_classes = [ReadOnly]
     serializer_class = Meal_Serializer
 
 class Order_Meal_View(generics.ListCreateAPIView):
