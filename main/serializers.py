@@ -14,9 +14,9 @@ class Table_Serializer(serializers.ModelSerializer):
         model = Table
         fields = '__all__'
 
-class Order_Meal_Serializer(serializers.ModelSerializer):
+class Meal_Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Order_Meal
+        model = Meal
         fields = '__all__'
 
 class Order_Meal_ToOrder_Serializer(serializers.ModelSerializer):
@@ -65,11 +65,11 @@ class Order_Serializer(serializers.ModelSerializer):
            Order_Meal.objects.create(order=order_instance, meal=order_meal['meal'])
 
         return order_instance
-class Order_Serializer_Single_Serializer(serializers.ModelSerializer):
+class Order_Single_Serializer(serializers.ModelSerializer):
     table = Table_Serializer(required=False)
     class Meta:
         model = Order
-        fields = ['closed', 'closed_at', 'created_at', 'table', 'waiter']
+        fields = '__all__'
         extra_kwargs = {'waiter': {'default': serializers.CurrentUserDefault()}}
 
     def validate_table(self, value):
@@ -94,8 +94,18 @@ class Order_Serializer_Single_Serializer(serializers.ModelSerializer):
                 table.save(update_fields=['table_status'])
             
         return value
-        
-class Meal_Serializer(serializers.ModelSerializer):
+    
+class Order_Meal_Serializer(serializers.ModelSerializer):
+    meal = Meal_Serializer()
+    order = Order_Single_Serializer()
     class Meta:
-        model = Meal
+        model = Order_Meal
         fields = '__all__'
+class Order_Meal_Single_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order_Meal
+        fields = '__all__'
+        extra_kwargs = {
+            'meal': {'required': False},
+            'order': {'required': False}
+        }

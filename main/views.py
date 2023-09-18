@@ -18,7 +18,7 @@ class Order_View(generics.ListCreateAPIView):
 class Order_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     permission_classes = [Waiter_FullAccess|Kitchen_ReadOnly]
-    serializer_class = Order_Serializer_Single_Serializer
+    serializer_class = Order_Single_Serializer
 
 class Meal_View(generics.ListCreateAPIView):
     queryset = Meal.objects.all()
@@ -36,4 +36,4 @@ class Order_Meal_View(generics.ListCreateAPIView):
 class Order_Meal_RetrieveUpdateDestroy_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order_Meal.objects.all()
     permission_classes = [Waiter_FullAccess|Kitchen_ReadOnly]
-    serializer_class = Order_Meal
+    serializer_class = Order_Meal_Single_Serializer

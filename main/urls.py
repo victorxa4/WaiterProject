@@ -38,4 +38,7 @@ urlpatterns = [
 
     path('meal/', Meal_View.as_view(), name='meal'),
     path('meal/<int:pk>/', Meal_RetrieveUpdateDestroy_View.as_view(), name='single_meal'),
+
+    path('order_meal/', Order_Meal_View.as_view(), name='meal'),
+    path('order_meal/<int:pk>/', Order_Meal_RetrieveUpdateDestroy_View.as_view(), name='single_meal'),
 ]
