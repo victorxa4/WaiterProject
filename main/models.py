@@ -18,7 +18,7 @@ class Account(AbstractUser):
         choices=account_type_choices.choices
     )
 
-    def save(self):
+    def save(self, *args, **kwargs):
         user = super(Account, self)
         user.set_password(self.password)
         user.save()
