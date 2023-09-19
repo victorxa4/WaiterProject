@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator
+from django.contrib.auth.hashers import make_password
 
 # fazer account para caixa?
-
 class Account(AbstractUser):
     class Meta:
         verbose_name = 'Account'
@@ -18,11 +18,9 @@ class Account(AbstractUser):
         choices=account_type_choices.choices
     )
 
-    def save(self, *args, **kwargs):
-        user = super(Account, self)
-        user.set_password(self.password)
-        user.save()
-        return user
+    def validate_password(self, value):
+        return make_password(value)
+
 
 class Table(models.Model):
     class table_status_choices(models.TextChoices):
