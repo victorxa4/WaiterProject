@@ -18,12 +18,10 @@ class Account(AbstractUser):
         choices=account_type_choices.choices
     )
 
-    def save(self, *args, **kwargs):
-        user = super(Account, self)
-        user.set_password(self.password)
-        user.save()
-        return user
-
+    def validate_password(self, value):
+        self.set_passwosrd(value)
+        return self
+    
 class Table(models.Model):
     class table_status_choices(models.TextChoices):
         free = 'fr', 'free'
