@@ -18,8 +18,9 @@ class Account(AbstractUser):
         choices=account_type_choices.choices
     )
 
-    def validate_password(self, value):
-        return make_password(value)
+    def save(self, *args, **kwargs):
+        self.set_password(self.password)
+        super(Account, self).save(*args, **kwargs)
 
 
 class Table(models.Model):
