@@ -19,8 +19,10 @@ class Account(AbstractUser):
     )
 
     def save(self, *args, **kwargs):
-        self.set_password(self.password)
+        if self.is_superuser and self.pk: # if updating superuser
+            self.set_password(self.password)
         super(Account, self).save(*args, **kwargs)
+    
 
 
 class Table(models.Model):
